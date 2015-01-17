@@ -49,7 +49,7 @@ deviceListPage.css("span.codename").each_with_index do |deviceName, index|
 end
 
 # test smaller sample
-devices = devices.last(3)
+# devices = devices.last(3)
 
 # loop through all devices
 devices.each_with_index do |device, index|
