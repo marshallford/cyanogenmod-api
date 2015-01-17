@@ -36,3 +36,4 @@ build/
 # project
 log.txt
 output/
+device-list.json

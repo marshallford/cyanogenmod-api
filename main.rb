@@ -49,7 +49,7 @@ deviceListPage.css("span.codename").each_with_index do |deviceName, index|
 end
 
 # test smaller sample
-# devices = devices.last(5)
+devices = devices.last(3)
 
 # loop through all devices
 devices.each_with_index do |device, index|
@@ -101,6 +101,15 @@ devices.each_with_index do |device, index|
 	File.open("output/" + device + ".json","w") do |f|
   		f.write(JSON.pretty_generate(JSON.parse(hash.to_json)))
 	end
+
+	# create main json file
+	hash = {:deviceCount => devices.length.to_s, :lastUpdated => Time.new.utc }
+	devices.each_with_index do |item, index|
+		source = {:deviceList => [ {:deviceName => devices[index]}]}
+		DeepMerger.deep_merge!(hash, source)
+	end
+	# save hash as json to file
+	File.open("device-list.json","w") do |f|
+  		f.write(JSON.pretty_generate(JSON.parse(hash.to_json)))
+	end
 end
-
-
