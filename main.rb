@@ -14,6 +14,7 @@ $currentTime = timeNow.utc
 
 # vars
 baseDeviceURL = "https://download.cyanogenmod.org"
+baseApiUrl = "http://api.marshallford.me/cyanogenmod/v1/"
 devices = []
 
 # method that checks if website is valid/available and returns Nokogiri HTML object
@@ -105,7 +106,7 @@ devices.each_with_index do |device, index|
 	# create main json file
 	hash = {:deviceCount => devices.length.to_s, :lastUpdated => Time.new.utc }
 	devices.each_with_index do |item, index|
-		source = {:deviceList => [ {:deviceName => devices[index]}]}
+		source = {:deviceList => [ {:deviceName => devices[index] , :deviceUrl => baseApiUrl + "device/" + devices[index] + ".json"}]}
 		DeepMerger.deep_merge!(hash, source)
 	end
 	# save hash as json to file
